@@ -8,6 +8,7 @@ import {
   Pressable,
   ActivityIndicator,
   Alert,
+  Button,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -285,320 +286,320 @@ const Llamadas = () => {
   const fecha = moment(new Date()).format("DD/MM/YYYY");
 
   return (
-    <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
-      <Text style={{ padding: 10, textAlign: "center" }}>
-        FORMATO DE ASESORÍA PARA MEJORAR
-      </Text>
-      <Text style={{ padding: 10 }}>Fecha: {fecha}</Text>
-      <View style={{ padding: 10 }}>
-        <SelectList
-          setSelected={setSelected}
-          data={data}
-          placeholder="Nombre colaborador (a):"
-          searchPlaceholder="Buscar"
-        />
-      </View>
-      <View style={{ padding: 10 }}>
-        <SelectList
-          setSelected={setSelectedDepto}
-          data={dataDepto}
-          placeholder="Departamento:"
-          searchPlaceholder="Buscar"
-        />
-      </View>
-      <View style={{ padding: 10 }}>
-        <SelectList
-          setSelected={setSelectedPuesto}
-          data={dataPuesto}
-          placeholder="Puesto:"
-          searchPlaceholder="Buscar"
-        />
-      </View>
-      <View style={{ padding: 10 }}>
-        <SelectList
-          setSelected={setSelectedGrado}
-          data={datosGrado}
-          placeholder="Tipo de Llamada de Atención: "
-          searchPlaceholder="Buscar"
-        />
-      </View>
-      <TextInput
-        style={styles.input}
-        value={descripcion}
-        placeholder="Descripción"
-        onChangeText={setDescripcion}
-      />
-
-      <View style={styles.input}>
-        {!showPickerImplementacion && (
-          <Pressable onPress={toggleDateImplementacion}>
-            <TextInput
-              style={{ color: "black" }}
-              value={
-                fechaImplementacion === ""
-                  ? "Fecha de Implementación"
-                  : moment(fechaImplementacion).format("DD/MM/YYYY")
-              }
-              onChangeText={setFechaImplementacion}
-              editable={false}
-              placeholder="Fecha de Implementación"
-            />
-          </Pressable>
-        )}
-      </View>
-
-      {showPickerImplementacion && (
-        <DateTimePicker
-          display="calendar"
-          testID="dateTimePicker"
-          value={dateImplementacion}
-          mode="date"
-          is24Hour={true}
-          locale="es-ES"
-          onChange={onChange}
-        />
-      )}
-      <TextInput
-        style={styles.input}
-        value={accionCorrectiva}
-        placeholder="Acción Correctiva"
-        onChangeText={setAccionCorrectiva}
-      />
-      <TextInput
-        style={styles.input}
-        value={compromiso}
-        placeholder="Compromiso"
-        onChangeText={setCompromiso}
-      />
-      <TextInput
-        style={styles.input}
-        value={proximoGrado}
-        placeholder="Próximo llamado de atención"
-        onChangeText={setProximoGrado}
-      />
-
-      <View style={styles.input}>
-        {!showPickerInicioCompromiso && (
-          <Pressable onPress={toggleDateInicioCompromiso}>
-            <TextInput
-              style={{ color: "black" }}
-              value={
-                fechaInicioCompromiso === ""
-                  ? "Fecha de inicio de compromiso"
-                  : moment(fechaInicioCompromiso).format("DD/MM/YYYY")
-              }
-              onChangeText={setFechaInicioCompromiso}
-              editable={false}
-              placeholder="Fecha de inicio de compromiso"
-            />
-          </Pressable>
-        )}
-      </View>
-
-      {showPickerInicioCompromiso && (
-        <DateTimePicker
-          display="calendar"
-          testID="dateTimePicker"
-          value={dateInicioCompromiso}
-          mode="date"
-          is24Hour={true}
-          locale="es-ES"
-          onChange={onChangeInicioCompromiso}
-        />
-      )}
-
-      <View style={styles.input}>
-        {!showPickerFinalCompromiso && (
-          <Pressable onPress={toggleDateFinalCompromiso}>
-            <TextInput
-              style={{ color: "black" }}
-              value={
-                fechaFinalCompromiso === ""
-                  ? "Fecha de final de compromiso"
-                  : moment(fechaFinalCompromiso).format("DD/MM/YYYY")
-              }
-              onChangeText={setFechaFinalCompromiso}
-              editable={false}
-              placeholder="Fecha de final de compromiso"
-            />
-          </Pressable>
-        )}
-      </View>
-
-      {showPickerFinalCompromiso && (
-        <DateTimePicker
-          display="calendar"
-          testID="dateTimePicker"
-          value={dateFinalCompromiso}
-          mode="date"
-          is24Hour={true}
-          locale="es-ES"
-          onChange={onChangeFinalCompromiso}
-        />
-      )}
-
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Firma Colaborador</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Cerrar</Text>
-              </Pressable>
-              <ScrollView scrollEnabled={scrollEnabled}>
-                <View
-                  style={{
-                    height: 350,
-                    width: 400,
-                    alignItems: "center",
-                  }}
-                >
-                  <Signature
-                    onOK={(img) => setFirmaColaborador(img)}
-                    onBegin={() => setScrollEnabled(false)}
-                    onEnd={() => setScrollEnabled(true)}
-                    descriptionText="Firma Colaborador"
-                    clearText="Borrar"
-                    confirmText="Guardar"
-                    imageType="image/png"
-                    dotSize="0.5"
-                  />
-                </View>
-              </ScrollView>
-            </View>
-          </View>
-        </Modal>
-        <View style={styles.containerButton}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisible(true)}
-          >
-            <Text style={styles.textStyle}>Firma Colaborador</Text>
-          </Pressable>
+    <>
+      <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
+        <Text style={{ padding: 10, textAlign: "center" }}>
+          FORMATO DE ASESORÍA PARA MEJORAR
+        </Text>
+        <Text style={{ padding: 10 }}>Fecha: {fecha}</Text>
+        <View style={{ padding: 10 }}>
+          <SelectList
+            setSelected={setSelected}
+            data={data}
+            placeholder="Nombre colaborador (a):"
+            searchPlaceholder="Buscar"
+          />
         </View>
-      </View>
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisibleJefeInmediato}
-          onRequestClose={() => {
-            setModalVisibleJefeInmediato(!modalVisibleJefeInmediato);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Firma Jefe Inmediato</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() =>
-                  setModalVisibleJefeInmediato(!modalVisibleJefeInmediato)
+        <View style={{ padding: 10 }}>
+          <SelectList
+            setSelected={setSelectedDepto}
+            data={dataDepto}
+            placeholder="Departamento:"
+            searchPlaceholder="Buscar"
+          />
+        </View>
+        <View style={{ padding: 10 }}>
+          <SelectList
+            setSelected={setSelectedPuesto}
+            data={dataPuesto}
+            placeholder="Puesto:"
+            searchPlaceholder="Buscar"
+          />
+        </View>
+        <View style={{ padding: 10 }}>
+          <SelectList
+            setSelected={setSelectedGrado}
+            data={datosGrado}
+            placeholder="Tipo de Llamada de Atención: "
+            searchPlaceholder="Buscar"
+          />
+        </View>
+        <TextInput
+          style={styles.input}
+          value={descripcion}
+          placeholder="Descripción"
+          onChangeText={setDescripcion}
+        />
+
+        <View style={styles.input}>
+          {!showPickerImplementacion && (
+            <Pressable onPress={toggleDateImplementacion}>
+              <TextInput
+                style={{ color: "black" }}
+                value={
+                  fechaImplementacion === ""
+                    ? "Fecha de Implementación"
+                    : moment(fechaImplementacion).format("DD/MM/YYYY")
                 }
-              >
-                <Text style={styles.textStyle}>Cerrar</Text>
-              </Pressable>
-              <ScrollView scrollEnabled={scrollEnabled}>
-                <View
-                  style={{
-                    height: 350,
-                    width: 400,
-                    alignItems: "center",
-                  }}
-                >
-                  <Signature
-                    onOK={(img) => setFirmaJefe(img)}
-                    onBegin={() => setScrollEnabled(false)}
-                    onEnd={() => setScrollEnabled(true)}
-                    descriptionText="Firma Jefe Inmediato"
-                    clearText="Borrar"
-                    confirmText="Guardar"
-                    imageType="image/png"
-                    dotSize="0.5"
-                  />
-                </View>
-              </ScrollView>
-            </View>
-          </View>
-        </Modal>
-        <View style={styles.containerButton}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisibleJefeInmediato(true)}
-          >
-            <Text style={styles.textStyle}>Firma Jefe Inmediato</Text>
-          </Pressable>
+                onChangeText={setFechaImplementacion}
+                editable={false}
+                placeholder="Fecha de Implementación"
+              />
+            </Pressable>
+          )}
         </View>
-      </View>
-      <View style={styles.centeredView}>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisibleRrhh}
-          onRequestClose={() => {
-            setModalVisibleRrhh(!modalVisibleRrhh);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Firma RRHH o Testigo</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisibleRrhh(!modalVisibleRrhh)}
-              >
-                <Text style={styles.textStyle}>Cerrar</Text>
-              </Pressable>
-              <ScrollView scrollEnabled={scrollEnabled}>
-                <View
-                  style={{
-                    height: 350,
-                    width: 400,
-                    alignItems: "center",
-                  }}
-                >
-                  <Signature
-                    onOK={(img) => setFirmaRrhh(img)}
-                    onBegin={() => setScrollEnabled(false)}
-                    onEnd={() => setScrollEnabled(true)}
-                    descriptionText="Firma RRHH o Testigo"
-                    clearText="Borrar"
-                    confirmText="Guardar"
-                    imageType="image/png"
-                    dotSize="0.5"
-                  />
-                </View>
-              </ScrollView>
-            </View>
-          </View>
-        </Modal>
-        <View style={styles.containerButton}>
-          <Pressable
-            style={[styles.button, styles.buttonOpen]}
-            onPress={() => setModalVisibleRrhh(true)}
-          >
-            <Text style={styles.textStyle}>Firma RRHH o Testigo</Text>
-          </Pressable>
-        </View>
-        <ActivityIndicator
-          animating={loading}
-          size="large"
-          color="#1976d2"
-          style={{ marginTop: 10, marginBottom: 10 }}
+
+        {showPickerImplementacion && (
+          <DateTimePicker
+            display="calendar"
+            testID="dateTimePicker"
+            value={dateImplementacion}
+            mode="date"
+            is24Hour={true}
+            locale="es-ES"
+            onChange={onChange}
+          />
+        )}
+        <TextInput
+          style={styles.input}
+          value={accionCorrectiva}
+          placeholder="Acción Correctiva"
+          onChangeText={setAccionCorrectiva}
         />
-      </View>
-      <Pressable onPress={submit} style={[styles.button, styles.buttonOpen]}>
-        <Text style={styles.textStyle}>Crear</Text>
-      </Pressable>
-    </ScrollView>
+        <TextInput
+          style={styles.input}
+          value={compromiso}
+          placeholder="Compromiso"
+          onChangeText={setCompromiso}
+        />
+        <TextInput
+          style={styles.input}
+          value={proximoGrado}
+          placeholder="Próximo llamado de atención"
+          onChangeText={setProximoGrado}
+        />
+
+        <View style={styles.input}>
+          {!showPickerInicioCompromiso && (
+            <Pressable onPress={toggleDateInicioCompromiso}>
+              <TextInput
+                style={{ color: "black" }}
+                value={
+                  fechaInicioCompromiso === ""
+                    ? "Fecha de inicio de compromiso"
+                    : moment(fechaInicioCompromiso).format("DD/MM/YYYY")
+                }
+                onChangeText={setFechaInicioCompromiso}
+                editable={false}
+                placeholder="Fecha de inicio de compromiso"
+              />
+            </Pressable>
+          )}
+        </View>
+
+        {showPickerInicioCompromiso && (
+          <DateTimePicker
+            display="calendar"
+            testID="dateTimePicker"
+            value={dateInicioCompromiso}
+            mode="date"
+            is24Hour={true}
+            locale="es-ES"
+            onChange={onChangeInicioCompromiso}
+          />
+        )}
+
+        <View style={styles.input}>
+          {!showPickerFinalCompromiso && (
+            <Pressable onPress={toggleDateFinalCompromiso}>
+              <TextInput
+                style={{ color: "black" }}
+                value={
+                  fechaFinalCompromiso === ""
+                    ? "Fecha de final de compromiso"
+                    : moment(fechaFinalCompromiso).format("DD/MM/YYYY")
+                }
+                onChangeText={setFechaFinalCompromiso}
+                editable={false}
+                placeholder="Fecha de final de compromiso"
+              />
+            </Pressable>
+          )}
+        </View>
+
+        {showPickerFinalCompromiso && (
+          <DateTimePicker
+            display="calendar"
+            testID="dateTimePicker"
+            value={dateFinalCompromiso}
+            mode="date"
+            is24Hour={true}
+            locale="es-ES"
+            onChange={onChangeFinalCompromiso}
+          />
+        )}
+
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Firma Colaborador</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Text style={styles.textStyle}>Cerrar</Text>
+                </Pressable>
+                <ScrollView scrollEnabled={scrollEnabled}>
+                  <View
+                    style={{
+                      height: 350,
+                      width: 400,
+                      alignItems: "center",
+                    }}
+                  >
+                    <Signature
+                      onOK={(img) => setFirmaColaborador(img)}
+                      onBegin={() => setScrollEnabled(false)}
+                      onEnd={() => setScrollEnabled(true)}
+                      descriptionText="Firma Colaborador"
+                      clearText="Borrar"
+                      confirmText="Guardar"
+                      imageType="image/png"
+                      dotSize="0.5"
+                    />
+                  </View>
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+          <View style={styles.containerButton}>
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.textStyle}>Firma Colaborador</Text>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisibleJefeInmediato}
+            onRequestClose={() => {
+              setModalVisibleJefeInmediato(!modalVisibleJefeInmediato);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Firma Jefe Inmediato</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() =>
+                    setModalVisibleJefeInmediato(!modalVisibleJefeInmediato)
+                  }
+                >
+                  <Text style={styles.textStyle}>Cerrar</Text>
+                </Pressable>
+                <ScrollView scrollEnabled={scrollEnabled}>
+                  <View
+                    style={{
+                      height: 350,
+                      width: 400,
+                      alignItems: "center",
+                    }}
+                  >
+                    <Signature
+                      onOK={(img) => setFirmaJefe(img)}
+                      onBegin={() => setScrollEnabled(false)}
+                      onEnd={() => setScrollEnabled(true)}
+                      descriptionText="Firma Jefe Inmediato"
+                      clearText="Borrar"
+                      confirmText="Guardar"
+                      imageType="image/png"
+                      dotSize="0.5"
+                    />
+                  </View>
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+          <View style={styles.containerButton}>
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisibleJefeInmediato(true)}
+            >
+              <Text style={styles.textStyle}>Firma Jefe Inmediato</Text>
+            </Pressable>
+          </View>
+        </View>
+        <View style={styles.centeredView}>
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisibleRrhh}
+            onRequestClose={() => {
+              setModalVisibleRrhh(!modalVisibleRrhh);
+            }}
+          >
+            <View style={styles.centeredView}>
+              <View style={styles.modalView}>
+                <Text style={styles.modalText}>Firma RRHH o Testigo</Text>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => setModalVisibleRrhh(!modalVisibleRrhh)}
+                >
+                  <Text style={styles.textStyle}>Cerrar</Text>
+                </Pressable>
+                <ScrollView scrollEnabled={scrollEnabled}>
+                  <View
+                    style={{
+                      height: 350,
+                      width: 400,
+                      alignItems: "center",
+                    }}
+                  >
+                    <Signature
+                      onOK={(img) => setFirmaRrhh(img)}
+                      onBegin={() => setScrollEnabled(false)}
+                      onEnd={() => setScrollEnabled(true)}
+                      descriptionText="Firma RRHH o Testigo"
+                      clearText="Borrar"
+                      confirmText="Guardar"
+                      imageType="image/png"
+                      dotSize="0.5"
+                    />
+                  </View>
+                </ScrollView>
+              </View>
+            </View>
+          </Modal>
+          <View style={styles.containerButton}>
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisibleRrhh(true)}
+            >
+              <Text style={styles.textStyle}>Firma RRHH o Testigo</Text>
+            </Pressable>
+          </View>
+          <ActivityIndicator
+            animating={loading}
+            size="large"
+            color="#1976d2"
+            style={{ marginTop: 10, marginBottom: 10 }}
+          />
+        </View>
+      </ScrollView>
+      <Button onPress={submit} title="Crear"></Button>
+    </>
   );
 };
 
