@@ -45,7 +45,7 @@ const Menu = () => {
           maxHeight: 30,
         }}
       >
-        <Text>Bienvenido 👋 {usuario}</Text>
+        <Text>Bienvenid@ 👋 {usuario}</Text>
       </View>
       <TouchableOpacity
         style={{

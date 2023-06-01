@@ -65,7 +65,10 @@ const Llamadas = () => {
         },
       };
       axios
-        .get("https://anvar-demo.onrender.com/api/empleados", config)
+        .get(
+          "https://anvar-demo.onrender.com/api/empleados?filters[estado][$eq]=true",
+          config
+        )
         .then((res) => {
           let newArray = res.data.data.map((item) => {
             return { key: item.id, value: item.attributes.nombreCompleto };
@@ -76,7 +79,10 @@ const Llamadas = () => {
           console.log(error);
         });
       axios
-        .get("https://anvar-demo.onrender.com/api/departamentos", config)
+        .get(
+          "https://anvar-demo.onrender.com/api/departamentos?filters[estado][$eq]=true",
+          config
+        )
         .then((res) => {
           let newArray = res.data.data.map((item) => {
             return { key: item.id, value: item.attributes.descripcion };
@@ -87,7 +93,10 @@ const Llamadas = () => {
           console.log(error);
         });
       axios
-        .get("https://anvar-demo.onrender.com/api/puestos", config)
+        .get(
+          "https://anvar-demo.onrender.com/api/puestos?filters[estado][$eq]=true",
+          config
+        )
         .then((res) => {
           let newArray = res.data.data.map((item) => {
             return { key: item.id, value: item.attributes.descripcion };
@@ -339,7 +348,7 @@ const Llamadas = () => {
                 value={
                   fechaImplementacion === ""
                     ? "Fecha de Implementación"
-                    : moment(fechaImplementacion).format("DD/MM/YYYY")
+                    : moment(fechaImplementacion).format("L")
                 }
                 onChangeText={setFechaImplementacion}
                 editable={false}
@@ -387,7 +396,7 @@ const Llamadas = () => {
                 value={
                   fechaInicioCompromiso === ""
                     ? "Fecha de inicio de compromiso"
-                    : moment(fechaInicioCompromiso).format("DD/MM/YYYY")
+                    : moment(fechaInicioCompromiso).format("L")
                 }
                 onChangeText={setFechaInicioCompromiso}
                 editable={false}
@@ -417,7 +426,7 @@ const Llamadas = () => {
                 value={
                   fechaFinalCompromiso === ""
                     ? "Fecha de final de compromiso"
-                    : moment(fechaFinalCompromiso).format("DD/MM/YYYY")
+                    : moment(fechaFinalCompromiso).format("L")
                 }
                 onChangeText={setFechaFinalCompromiso}
                 editable={false}
@@ -466,7 +475,9 @@ const Llamadas = () => {
                     }}
                   >
                     <Signature
-                      onOK={(img) => setFirmaColaborador(img)}
+                      onOK={(img) => (
+                        setFirmaColaborador(img), setModalVisible(!modalVisible)
+                      )}
                       onBegin={() => setScrollEnabled(false)}
                       onEnd={() => setScrollEnabled(true)}
                       descriptionText="Firma Colaborador"
@@ -518,7 +529,10 @@ const Llamadas = () => {
                     }}
                   >
                     <Signature
-                      onOK={(img) => setFirmaJefe(img)}
+                      onOK={(img) => (
+                        setFirmaJefe(img),
+                        setModalVisibleJefeInmediato(!modalVisibleJefeInmediato)
+                      )}
                       onBegin={() => setScrollEnabled(false)}
                       onEnd={() => setScrollEnabled(true)}
                       descriptionText="Firma Jefe Inmediato"
@@ -568,7 +582,10 @@ const Llamadas = () => {
                     }}
                   >
                     <Signature
-                      onOK={(img) => setFirmaRrhh(img)}
+                      onOK={(img) => (
+                        setFirmaRrhh(img),
+                        setModalVisibleRrhh(!modalVisibleRrhh)
+                      )}
                       onBegin={() => setScrollEnabled(false)}
                       onEnd={() => setScrollEnabled(true)}
                       descriptionText="Firma RRHH o Testigo"
