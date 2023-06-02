@@ -66,7 +66,7 @@ const Llamadas = () => {
       };
       axios
         .get(
-          "https://anvar-demo.onrender.com/api/empleados?filters[estado][$eq]=true",
+          "https://strapi-production-db11.up.railway.app/api/empleados?filters[estado][$eq]=true",
           config
         )
         .then((res) => {
@@ -80,7 +80,7 @@ const Llamadas = () => {
         });
       axios
         .get(
-          "https://anvar-demo.onrender.com/api/departamentos?filters[estado][$eq]=true",
+          "https://strapi-production-db11.up.railway.app/api/departamentos?filters[estado][$eq]=true",
           config
         )
         .then((res) => {
@@ -94,7 +94,7 @@ const Llamadas = () => {
         });
       axios
         .get(
-          "https://anvar-demo.onrender.com/api/puestos?filters[estado][$eq]=true",
+          "https://strapi-production-db11.up.railway.app/api/puestos?filters[estado][$eq]=true",
           config
         )
         .then((res) => {
@@ -276,7 +276,7 @@ const Llamadas = () => {
           };
           axios
             .post(
-              "https://anvar-demo.onrender.com/api/llamadade-atencions",
+              "https://strapi-production-db11.up.railway.app/api/llamadade-atencions",
               dataJson,
               config
             )

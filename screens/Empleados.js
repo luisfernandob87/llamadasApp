@@ -32,7 +32,7 @@ const Empleados = () => {
       setLoading(true);
       axios
         .get(
-          "https://anvar-demo.onrender.com/api/empleados?filters[estado][$eq]=true",
+          "https://strapi-production-db11.up.railway.app/api/empleados?filters[estado][$eq]=true",
           config
         )
         .then((res) => setEmpleados(res.data.data))

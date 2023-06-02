@@ -31,7 +31,10 @@ const Login = () => {
     } else {
       setLoading(true);
       axios
-        .post("https://anvar-demo.onrender.com/api/auth/local", data)
+        .post(
+          "https://strapi-production-db11.up.railway.app/api/auth/local",
+          data
+        )
         .then((res) => {
           const usr = ["userName", res.data.user.username];
           const tkn = ["token", res.data.jwt];

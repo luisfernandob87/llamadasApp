@@ -45,7 +45,11 @@ const AgregarEmpleado = () => {
       console.log(dataJson);
 
       axios
-        .post("https://anvar-demo.onrender.com/api/empleados", dataJson, config)
+        .post(
+          "https://strapi-production-db11.up.railway.app/api/empleados",
+          dataJson,
+          config
+        )
         .then((res) => console.log(res))
         .catch(function (error) {
           console.log(error);
