@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import empleado from "../assets/empleado.png";
+import time from "../assets/time.png";
 import llamada from "../assets/llamada.png";
 import salida from "../assets/salida.png";
 import AsyncStorage, {
@@ -54,13 +54,13 @@ const Menu = () => {
           marginTop: "10%",
           maxHeight: 135,
         }}
-        onPress={() => navigation.navigate("Empleados")}
+        onPress={() => navigation.navigate("EntradasTarde")}
       >
         <Image
-          source={empleado}
+          source={time}
           style={{ aspectRatio: 0.6, resizeMode: "contain" }}
         />
-        <Text style={styles.texto}>Empleados</Text>
+        <Text style={styles.texto}>Entradas Tarde</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{
@@ -75,7 +75,7 @@ const Menu = () => {
           source={llamada}
           style={{ aspectRatio: 0.6, resizeMode: "contain" }}
         />
-        <Text style={styles.texto}>Llamadas de Atención</Text>
+        <Text style={styles.texto}>Llamadas de Atención Administrativas</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={{

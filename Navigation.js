@@ -4,8 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import Login from "./screens/Login";
 import Menu from "./screens/Menu";
-import Empleados from "./screens/Empleados";
-import AgregarEmpleado from "./screens/AgregarEmpleado";
+import EntradasTarde from "./screens/EntradasTarde";
 import Llamadas from "./screens/Llamadas";
 
 const AddStack = createNativeStackNavigator();
@@ -38,19 +37,10 @@ function MyStack() {
         }}
       />
       <AddStack.Screen
-        name="Empleados"
-        component={Empleados}
+        name="EntradasTarde"
+        component={EntradasTarde}
         options={{
-          title: "Administrar Empleados",
-          headerTitleAlign: "center",
-          headerTintColor: "#1976d2",
-        }}
-      />
-      <AddStack.Screen
-        name="AgregarEmpleado"
-        component={AgregarEmpleado}
-        options={{
-          title: "Agregar Empleado",
+          title: "Registrar Entrada Tarde",
           headerTitleAlign: "center",
           headerTintColor: "#1976d2",
         }}
