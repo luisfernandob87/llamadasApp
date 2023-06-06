@@ -114,6 +114,28 @@ const EntradasTarde = () => {
     },
   };
 
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
+  const [hora, setHora] = useState("");
+
+  const toggleDate = () => {
+    setShowPicker(!showPicker);
+  };
+  const onChange = ({ type }, selectedDate) => {
+    if (type == "set") {
+      const currentDate = selectedDate;
+      setDate(currentDate);
+      if (Platform.OS == "android") {
+        toggleDate();
+        setHora(currentDate);
+      }
+    } else {
+      toggleDate();
+    }
+  };
+
+  const entradaTarde = moment(date).format("HH:mm:ss");
+
   const fechaCreacion = moment(new Date()).format("YYYY-MM-DD");
 
   const submit = () => {
@@ -123,7 +145,8 @@ const EntradasTarde = () => {
       selectedPuesto == "" ||
       firmaJefe == "" ||
       firmaRrhh == "" ||
-      firmaColaborador == ""
+      firmaColaborador == "" ||
+      entradaTarde == ""
     ) {
       Alert.alert("Por favor llenar toda la información que se solicita");
     } else {
@@ -144,30 +167,29 @@ const EntradasTarde = () => {
               },
               grado: "Llegada tarde",
               descripcion: "Llegada tarde",
-              accionCorrectiva: accionCorrectiva,
-              compromiso: compromiso,
+              accionCorrectiva: data.accionCorrectiva,
+              compromiso: data.compromiso,
               creadoPor: usuario,
               firmaJefeInmediato: firmaJefe,
               firmaRrhh: firmaRrhh,
               firmaColaborador: firmaColaborador,
               fechaImplementacion: fechaCreacion,
-              inicioCompromiso: fechadeInicioCompromiso,
-              finalCompromiso: fechadeFinalCompromiso,
-              proximoGrado: proximoGrado,
-              EntradasTarde: "",
+              inicioCompromiso: data.inicioCompromiso,
+              finalCompromiso: data.finalCompromiso,
+              proximoGrado: data.proximoGrado,
+              entradaTarde: entradaTarde,
             },
           };
-          console.log(dataJson);
-          // axios
-          //   .post(
-          //     "https://strapi-production-db11.up.railway.app/api/llamadade-atencions",
-          //     dataJson,
-          //     config
-          //   )
-          //   .then((res) => console.log(res))
-          //   .catch(function (error) {
-          //     console.log(error);
-          //   });
+          axios
+            .post(
+              "https://strapi-production-db11.up.railway.app/api/llamadade-atencions",
+              dataJson,
+              config
+            )
+            .then((res) => console.log(res))
+            .catch(function (error) {
+              console.log(error);
+            });
         } catch (e) {}
       };
       getMyObject();
@@ -182,7 +204,7 @@ const EntradasTarde = () => {
     <>
       <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
         <Text style={{ padding: 10, textAlign: "center" }}>
-          FORMATO DE ASESORÍA PARA MEJORAR
+          FORMATO DE ENTRADA TARDE
         </Text>
         <Text style={{ padding: 10 }}>Fecha: {fecha}</Text>
         <View style={{ padding: 10 }}>
@@ -209,6 +231,36 @@ const EntradasTarde = () => {
             searchPlaceholder="Buscar"
           />
         </View>
+        <View style={styles.input}>
+          {!showPicker && (
+            <Pressable onPress={toggleDate}>
+              <TextInput
+                style={{ color: "black" }}
+                value={
+                  hora === ""
+                    ? "Hora de entrada tarde"
+                    : moment(hora).format("HH:mm")
+                }
+                onChangeText={setHora}
+                editable={false}
+                placeholder="Hora de entrada tarde"
+              />
+            </Pressable>
+          )}
+        </View>
+
+        {showPicker && (
+          <DateTimePicker
+            display="default"
+            testID="dateTimePicker"
+            value={date}
+            mode="time"
+            is24Hour={true}
+            locale="es-ES"
+            onChange={onChange}
+          />
+        )}
+
         <View style={styles.centeredView}>
           <Modal
             animationType="slide"
