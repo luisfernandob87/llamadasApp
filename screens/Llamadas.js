@@ -50,6 +50,7 @@ const Llamadas = () => {
       value: "Llamada de atención escrita",
     },
     { key: "Suspensión", value: "Suspensión" },
+    { key: "Descuento día y séptimo", value: "Descuento día y séptimo" },
   ];
 
   useEffect(() => {
