@@ -17,12 +17,14 @@ const Empleados = () => {
   const [empleados, setEmpleados] = useState([]);
   const navigation = useNavigation();
 
+  const page = "https://llamadasdeatencionbackend-rucz-dev.fl0.io";
+
   useEffect(() => {
     getMultiple = async () => {
       let values;
       try {
         values = await AsyncStorage.multiGet(["token", "userName"]);
-      } catch (e) {}
+      } catch (e) { }
       const token = values[0][1];
       const config = {
         headers: {
@@ -32,7 +34,7 @@ const Empleados = () => {
       setLoading(true);
       axios
         .get(
-          "https://strapi-production-db11.up.railway.app/api/empleados?filters[estado][$eq]=true",
+          `${page}/api/empleados?filters[estado][$eq]=true`,
           config
         )
         .then((res) => setEmpleados(res.data.data))

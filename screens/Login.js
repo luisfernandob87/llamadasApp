@@ -25,6 +25,8 @@ const Login = () => {
 
   AsyncStorage.clear();
 
+  const page = "https://llamadasdeatencionbackend-rucz-dev.fl0.io";
+
   const submit = () => {
     if (usuario == "" || password == "") {
       Alert.alert("Ingrese usuario y contraseña");
@@ -32,7 +34,7 @@ const Login = () => {
       setLoading(true);
       axios
         .post(
-          "https://strapi-production-db11.up.railway.app/api/auth/local",
+          `${page}/api/auth/local`,
           data
         )
         .then((res) => {

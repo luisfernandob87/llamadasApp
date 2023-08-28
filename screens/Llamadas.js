@@ -43,6 +43,8 @@ const Llamadas = () => {
   const [proximoGrado, setProximoGrado] = useState("");
   const [scrollEnabled, setScrollEnabled] = useState(false);
 
+  const page = "https://llamadasdeatencionbackend-rucz-dev.fl0.io";
+
   const datosGrado = [
     { key: "Llamada de atención verbal", value: "Llamada de atención verbal" },
     {
@@ -58,7 +60,7 @@ const Llamadas = () => {
       let values;
       try {
         values = await AsyncStorage.multiGet(["token", "userName"]);
-      } catch (e) {}
+      } catch (e) { }
       const token = values[0][1];
       const config = {
         headers: {
@@ -67,7 +69,7 @@ const Llamadas = () => {
       };
       axios
         .get(
-          "https://strapi-production-db11.up.railway.app/api/empleados?filters[estado][$eq]=true",
+          `${page}/api/empleados?filters[estado][$eq]=true`,
           config
         )
         .then((res) => {
@@ -81,7 +83,7 @@ const Llamadas = () => {
         });
       axios
         .get(
-          "https://strapi-production-db11.up.railway.app/api/departamentos?filters[estado][$eq]=true",
+          `${page}/api/departamentos?filters[estado][$eq]=true`,
           config
         )
         .then((res) => {
@@ -95,7 +97,7 @@ const Llamadas = () => {
         });
       axios
         .get(
-          "https://strapi-production-db11.up.railway.app/api/puestos?filters[estado][$eq]=true",
+          `${page}/api/puestos?filters[estado][$eq]=true`,
           config
         )
         .then((res) => {
@@ -277,7 +279,7 @@ const Llamadas = () => {
           };
           axios
             .post(
-              "https://strapi-production-db11.up.railway.app/api/llamadade-atencions",
+              `${page}/api/llamadade-atencions`,
               dataJson,
               config
             )
@@ -285,7 +287,7 @@ const Llamadas = () => {
             .catch(function (error) {
               console.log(error);
             });
-        } catch (e) {}
+        } catch (e) { }
       };
       getMyObject();
       setLoading(false);
